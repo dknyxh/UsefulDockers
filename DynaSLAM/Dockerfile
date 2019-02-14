@@ -14,8 +14,8 @@ RUN apt-get update && \
 	apt-get install -y curl && \
 	apt-get install -y gcc && \
 	apt-get install -y git && \
-	apt-get install -y libglew-dev
-
+	apt-get install -y libglew-dev && \
+	apt-get install -y libboost-all-dev
 
 #OpenCV dependency
 RUN apt-get install -y qt5-default libvtk6-dev && \
@@ -61,13 +61,11 @@ RUN cd ${DOWNLOAD_PATH} && \
 	cmake .. &&\
  	make
 
-#Orb-Slam2
-#The original has a small issue with missing 
-#Import file https://github.com/raulmur/ORB_SLAM2/
 
-RUN git clone https://github.com/dknyxh/ORB_SLAM2 ORB_SLAM2 &&\
-	cd ORB_SLAM2 &&\
-	chmod +x build.sh &&\
-	./build.sh
+#DynaSLAM
+#Because a small problem with OpenCV2 Cmake file and DBoW2 library, I used my own repo for this
+RUN git clone https://github.com/dknyxh/DynaSLAM DynaSLAM &&\
+	cd DynaSLAM &&\
+	chmod +x build.sh
 
 
