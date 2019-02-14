@@ -41,5 +41,33 @@ RUN cd ${DOWNLOAD_PATH} && \
 	make install && \
 	ldconfig
 
+#Eigen
+RUN cd ${DOWNLOAD_PATH} && \
+	wget http://bitbucket.org/eigen/eigen/get/${EIGEN_VERSION}.tar.bz2 && \
+	mkdir eigen && \
+	tar -xvjf ${EIGEN_VERSION}.tar.bz2 --strip-components=1 -C ./eigen &&\
+	cd eigen && \
+	mkdir build && \
+	cd build && \
+	cmake .. &&\
+	make install
+
+#Pangolin
+RUN cd ${DOWNLOAD_PATH} && \
+	git clone https://github.com/stevenlovegrove/Pangolin.git &&\
+	cd Pangolin &&\
+	mkdir build &&\
+	cd build &&\
+	cmake .. &&\
+ 	make
+
+#Orb-Slam2
+#The original has a small issue with missing 
+#Import file https://github.com/raulmur/ORB_SLAM2/
+
+RUN git clone https://github.com/dknyxh/ORB_SLAM2 ORB_SLAM2 &&\
+	cd ORB_SLAM2 &&\
+	chmod +x build.sh &&\
+	./build.sh
 
 
