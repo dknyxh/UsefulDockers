@@ -70,4 +70,8 @@ RUN git clone https://github.com/dknyxh/ORB_SLAM2 ORB_SLAM2 &&\
 	chmod +x build.sh &&\
 	./build.sh
 
+RUN apt-get install -y firefox
+RUN apt-get install -qqy x11-apps
+ENV DISPLAY $DISPLAY
+CMD xeyes
 
